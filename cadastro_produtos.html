@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Cadastro de Produto</title>
+</head>
+<body>
+  <h1>Cadastro de Produto</h1>
+
+  <form id="productForm">
+    <label for="nome">Nome do Produto:</label><br>
+    <input type="text" id="nome" name="nome" required><br><br>
+
+    <label for="preco">Preço:</label><br>
+    <input type="number" id="preco" name="preco" step="0.01" required><br><br>
+
+    <label for="quantidade">Quantidade em Estoque:</label><br>
+    <input type="number" id="quantidade" name="quantidade" required><br><br>
+
+    <label for="promocao">Promoção:</label>
+    <input type="checkbox" id="promocao" name="promocao"><br><br>
+
+    <label for="categoria">Categoria:</label>
+    <select id="categoria" name="categoria">
+      <option value="eletronicos">Eletrônicos</option>
+      <option value="roupas">Roupas</option>
+      <option value="livros">Livros</option>
+    </select><br><br>
+
+    <button type="submit">Cadastrar Produto</button>
+  </form>
+
+  <p><a href="index.html">Voltar à página inicial</a></p>
+
+  <script>
+    document.getElementById("productForm").addEventListener("submit", function(event) {
+      event.preventDefault(); // Evita o envio padrão do formulário
+
+      // Obtém os valores dos campos do formulário
+      const nome = document.getElementById("nome").value;
+      const preco = document.getElementById("preco").value;
+      const quantidade = document.getElementById("quantidade").value;
+      const promocao = document.getElementById("promocao").checked ? "Sim" : "Não";
+      const categoria = document.getElementById("categoria").value;
+
+      
+      const produto = { nome, preco, quantidade, promocao, categoria };
+
+      
+      const produtos = JSON.parse(localStorage.getItem("produtos")) || [];
+      
+     
+      produtos.push(produto);
+
+      
+      localStorage.setItem("produtos", JSON.stringify(produtos));
+
+      // Redireciona para a página de lista de produtos
+      window.location.href = "lista_produtos.html";
+    });
+  </script>
+</body>
+</html>

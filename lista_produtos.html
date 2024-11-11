@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Lista de Produtos</title>
+</head>
+<body>
+  <h1>Lista de Produtos Cadastrados</h1>
+
+  <table border="1">
+    <thead>
+      <tr>
+        <th>Nome</th>
+        <th>Preço</th>
+        <th>Quantidade</th>
+        <th>Categoria</th>
+        <th>Promoção</th>
+      </tr>
+    </thead>
+    <tbody id="productTable">
+      <!-- Os produtos serão adicionados aqui -->
+    </tbody>
+  </table>
+
+  <p><a href="index.html">Voltar à página inicial</a></p>
+
+  <script>
+    
+    const produtos = JSON.parse(localStorage.getItem("produtos")) || [];
+
+    const productTable = document.getElementById("productTable");
+
+    
+    produtos.forEach(produto => {
+      const row = document.createElement("tr");
+
+      row.innerHTML = `
+        <td>${produto.nome}</td>
+        <td>R$ ${parseFloat(produto.preco).toFixed(2)}</td>
+        <td>${produto.quantidade}</td>
+        <td>${produto.categoria}</td>
+        <td>${produto.promocao}</td>
+      `;
+
+      productTable.appendChild(row);
+    });
+  </script>
+</body>
+</html>
